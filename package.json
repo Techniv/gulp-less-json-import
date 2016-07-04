@@ -1,0 +1,23 @@
+{
+  "name": "gulp-less-json-import",
+  "version": "1.0.0",
+  "description": "Import Less variables from json files",
+  "main": "index.js",
+  "author":{
+    "name": "Vincent Peybernes",
+    "email": "vpeybernes.pro@gmail.com"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Techniv/gulp-less-json-import.git"
+  },
+  "dependencies": {
+    "through2": "^2.0.0",
+    "gulp-util": "^3.0.6"
+  },
+
+  "engines": {
+    "node": ">=0.12.0"
+  }
+}
