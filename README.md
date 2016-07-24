@@ -1,9 +1,9 @@
 # gulp-less-json-import
 
-This is a gulp preprocessor for the less compilation. It provide a directive **@json-import** to import variables 
+This is a gulp preprocessor for the less compilation. It provides a directive **@json-import** to import variables 
 defined in a json file.
 
-It inject the Less formated data in place of the directive in the file buffer without write it on disk.
+It inject the Less formated data in place of the directive in the file buffer without writing it on disk.
 
 ## Exemple
 
