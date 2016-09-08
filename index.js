@@ -54,7 +54,10 @@ module.exports = function (options) {
             
             (function exploreJson(currentLevel, path){
                 for(var key in currentLevel){
-                    switch (typeof currentLevel){
+                    switch (typeof currentLevel[key]){
+                        case 'object':
+                            exploreJson(currentLevel[key], path.concat(key));
+                            break;
                         default:
                             lessContent.push('@');
                             lessContent.push(nameFormatter(path.concat(key)));
