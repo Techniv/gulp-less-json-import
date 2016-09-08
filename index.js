@@ -2,6 +2,21 @@
 
 var NAME = 'gulp-less-json-import';
 
+/**
+ * @typedef
+ * @name LessJsonImportOptions
+ * @type Object
+ * @property {NameFormatter} nameFormatter
+ */
+
+/**
+ * @typedef
+ * @name NameFormatter
+ * @type Function
+ * @param {String[]} path
+ */
+
+
 var through2        = require('through2');
 var gutil           = require('gulp-util');
 var StringDecoder   = require('string_decoder').StringDecoder;
@@ -12,10 +27,14 @@ var fs              = require('fs');
 var PluginError    = gutil.PluginError;
 
 var importMatcher = /^\s?@json-import "(.*?)";/;
-var defaultNameFormatter = function(path){
+/** @name {NameFormatter} defaultNameFormatter */
+function defaultNameFormatter(path){
     return path.join('-');
 };
 
+/**
+ * @param {LessJsonImportOptions} options
+ */
 module.exports = function (options) {
     var nameFormatter = defaultNameFormatter;
     if(options && options.nameFormatter) nameFormatter = options.nameFormatter;
