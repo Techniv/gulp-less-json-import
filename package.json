@@ -17,6 +17,11 @@
     "gulp-util": "^3.0.6"
   },
 
+  "devDependencies": {
+    "gulp" : "*",
+    "gulp-less": "*"
+  },
+
   "engines": {
     "node": ">=0.12.0"
   }
