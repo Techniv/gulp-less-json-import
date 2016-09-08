@@ -1,4 +1,4 @@
-### NEXT
+### v1.1.0 *September 8th 2016*
 - Add test
 - New implementation for json-processor
 - Overridable variable name formatter
