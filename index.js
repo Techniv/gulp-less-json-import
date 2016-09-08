@@ -5,15 +5,22 @@ var NAME = 'gulp-less-json-import';
 var through2        = require('through2');
 var gutil           = require('gulp-util');
 var StringDecoder   = require('string_decoder').StringDecoder;
-var Buffer = require('buffer').Buffer;
+var Buffer          = require('buffer').Buffer;
 var path            = require('path');
 var fs              = require('fs');
 
 var PluginError    = gutil.PluginError;
 
 var importMatcher = /^\s?@json-import "(.*?)";/;
+var defaultNameFormatter = function(path){
+    return path.join('-');
+};
 
-module.exports = function () {
+module.exports = function (options) {
+    var nameFormatter = defaultNameFormatter;
+    if(options && options.nameFormatter) nameFormatter = options.nameFormatter;
+
+
     return through2.obj(function(file, encoding, callback){
         
         if(file.isStream()){
@@ -44,13 +51,20 @@ module.exports = function () {
             }
 
             var lessContent = [];
-            for(var key in jsonContent){
-                lessContent.push('@');
-                lessContent.push(key);
-                lessContent.push(': ');
-                lessContent.push(jsonContent[key]);
-                lessContent.push(';\n');
-            }
+            
+            (function exploreJson(currentLevel, path){
+                for(var key in currentLevel){
+                    switch (typeof currentLevel){
+                        default:
+                            lessContent.push('@');
+                            lessContent.push(nameFormatter(path.concat(key)));
+                            lessContent.push(': ');
+                            lessContent.push(currentLevel[key]);
+                            lessContent.push(';\n');
+                    }
+                }
+            })(jsonContent, []);
+
 
             content[i] = lessContent.join('');
 
