@@ -1,0 +1,10 @@
+{
+  "color1": "#ff0000",
+  "color2": "#00ff00",
+  "font": "Helvetica",
+  "border": {
+    "type": "solid",
+    "size": "1px",
+    "color": "grey"
+  }
+}
