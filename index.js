@@ -64,7 +64,7 @@ module.exports = function (options) {
             var jsonContent = {};
 
             try{
-                jsonContent = require(jsonPath);
+                jsonContent = JSON.parse(fs.readFileSync(jsonPath, {encoding: "utf-8", flat: "rs"}));;
             } catch (e){
                 gutil.log(NAME, 'can\'t load "'+jsonPath+'"');
             }
