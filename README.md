@@ -21,7 +21,14 @@ var less = require('gulp-less');
 var lessJsonImport = require('gulp-less-json-import');
 
 gulp.src(['./less/**/*.less', '!./less/**/_*.less'])
-    .pipe(lessJsonImport())
+    .pipe(lessJsonImport({
+         nameFormatter: function(varPath, jsonPath) { // Optional
+             var filename = path.parse(jsonPath).name;
+             if (filename === 'colors') varPath[0] = 'color' + varPath[0];
+             if (filename === 'icons') varPath[0] = 'icon' + varPath[0];
+             return varPath;
+         }
+     }))
     .pipe(less())
     .pipe(gulp.dest('./css'));
 ```
@@ -31,8 +38,9 @@ gulp.src(['./less/**/*.less', '!./less/**/_*.less'])
 
 You can passe an option object to the lessJsonImport function.
 
-- `{Function} nameFormatter` Override the variable name formatter. Take the path of the variable as `String[]` and may return the variable name as `String`.
-By default the formatter do `path.join('-')`.
+- `{Function} nameFormatter` Override the variable name formatter. Take the path of the variable as `String[]` and 
+the path of the json file as `String`. It may return the variable name as `String`.
+By default the formatter do `varPath.join('-')`.
  
 
 ## Example

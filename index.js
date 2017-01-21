@@ -64,14 +64,14 @@ module.exports = function (options) {
             var jsonContent = {};
 
             try{
-                jsonContent = require(jsonPath);
+                jsonContent = JSON.parse(fs.readFileSync(jsonPath, {encoding: "utf-8", flat: "rs"}));;
             } catch (e){
                 gutil.log(NAME, 'can\'t load "'+jsonPath+'"');
             }
 
             var lessContent = [];
             
-            (function exploreJson(currentLevel, path){
+            (function exploreJson(currentLevel, path, filePath){
                 for(var key in currentLevel){
                     switch (typeof currentLevel[key]){
                         case 'object':
@@ -79,13 +79,13 @@ module.exports = function (options) {
                             break;
                         default:
                             lessContent.push('@');
-                            lessContent.push(nameFormatter(path.concat(key)));
+                            lessContent.push(nameFormatter(path.concat(key), filePath));
                             lessContent.push(': ');
                             lessContent.push(currentLevel[key]);
                             lessContent.push(';\n');
                     }
                 }
-            })(jsonContent, []);
+            })(jsonContent, [], jsonPath);
 
 
             content[i] = lessContent.join('');

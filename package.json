@@ -1,6 +1,6 @@
 {
   "name": "gulp-less-json-import",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Import Less variables from json files",
   "main": "index.js",
   "author":{
